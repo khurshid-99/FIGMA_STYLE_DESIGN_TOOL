@@ -9,8 +9,9 @@
 }
 
 :root {
-  --primary-bg: #151515;
+  --primary-bg: #2c2c2c;
   --secondery-bg: #e5e5e5;
+  --button-bg: #383838;
   --primary-color: white;
   --padding-sm: 0.25rem;
   --padding-md: 0.75rem;
@@ -50,12 +51,167 @@ main .bottom .middle {
   position: relative;
   width: 80%;
   height: 100%;
-  background-color: #2c2c2c;
+  background-color: var(--secondery-bg);
   overflow: hidden;
 }
 main .bottom .right {
   min-width: 15rem;
   height: 100%;
+  padding: var(--padding-md);
+}
+main .bottom .right .position_contanier {
+  border-bottom: 1px solid rgba(245, 245, 245, 0.377);
+  padding-bottom: 1rem;
+}
+main .bottom .right .position_contanier .alignment {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+main .bottom .right .position_contanier .alignment div {
+  border-radius: 0.25rem;
+  overflow: hidden;
+  display: flex;
+  gap: 5px;
+  border: 1px solid rgba(245, 245, 245, 0.377);
+}
+main .bottom .right .position_contanier .alignment div button {
+  border: none;
+  background-color: var(--button-bg);
+  padding-inline: var(--padding-md);
+  padding-block: var(--padding-sm);
+  transition: all 0.3s linear;
+  cursor: pointer;
+}
+main .bottom .right .position_contanier .alignment div button:hover {
+  background-color: #858585;
+}
+main .bottom .right .position_contanier .position h4 {
+  font-weight: 100;
+  margin-block: 1rem;
+}
+main .bottom .right .position_contanier .position .position_width_height {
+  color: var(--secondery-bg);
+  display: flex;
+  gap: 1rem;
+}
+main .bottom .right .position_contanier .position .position_width_height div {
+  padding: 0.5rem;
+  background-color: var(--button-bg);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  transition: all 0.3s linear;
+}
+main .bottom .right .position_contanier .position .position_width_height div:hover {
+  border: 1px solid rgba(245, 245, 245, 0.377);
+}
+main .bottom .right .position_contanier .position .position_width_height div input {
+  width: 5rem;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: var(--secondery-bg);
+}
+main .bottom .right .layout_contanier {
+  border-bottom: 1px solid rgba(245, 245, 245, 0.377);
+  padding-bottom: 1rem;
+}
+main .bottom .right .layout_contanier h4 {
+  font-weight: 100;
+  margin-block: 1rem;
+}
+main .bottom .right .layout_contanier .layout_width_height {
+  color: var(--secondery-bg);
+  display: flex;
+  gap: 1rem;
+}
+main .bottom .right .layout_contanier .layout_width_height div {
+  padding: 0.5rem;
+  background-color: var(--button-bg);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  transition: all 0.3s linear;
+}
+main .bottom .right .layout_contanier .layout_width_height div:hover {
+  border: 1px solid rgba(245, 245, 245, 0.377);
+}
+main .bottom .right .layout_contanier .layout_width_height div input {
+  width: 5rem;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: var(--secondery-bg);
+}
+main .bottom .right .opacity {
+  border-bottom: 1px solid rgba(245, 245, 245, 0.377);
+  padding-bottom: 1rem;
+}
+main .bottom .right .opacity h4 {
+  font-weight: 100;
+  margin-block: 1rem;
+}
+main .bottom .right .opacity div {
+  padding: 0.5rem;
+  background-color: var(--button-bg);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  transition: all 0.3s linear;
+}
+main .bottom .right .opacity div:hover {
+  border: 1px solid rgba(245, 245, 245, 0.377);
+}
+main .bottom .right .opacity div img {
+  width: 1rem;
+}
+main .bottom .right .opacity div input {
+  width: 5rem;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: var(--secondery-bg);
+}
+main .bottom .right .fill {
+  border-bottom: 1px solid rgba(245, 245, 245, 0.377);
+  padding-bottom: 1rem;
+}
+main .bottom .right .fill h4 {
+  font-weight: 100;
+  margin-block: 1rem;
+}
+main .bottom .right .fill input {
+  outline: none;
+  border: none;
+  transition: all 0.3s linear;
+  cursor: pointer;
+}
+main .bottom .right .fill input:hover {
+  border: 1px solid rgb(236, 236, 236);
+}
+main .bottom .right .stroke {
+  border-bottom: 1px solid rgba(245, 245, 245, 0.377);
+  padding-bottom: 1rem;
+}
+main .bottom .right .stroke h4 {
+  font-weight: 100;
+  margin-block: 1rem;
+}
+main .bottom .right .stroke input {
+  outline: none;
+  border: none;
+  transition: all 0.3s linear;
+  cursor: pointer;
+}
+main .bottom .right .stroke input:hover {
+  border: 1px solid rgb(236, 236, 236);
 }
 main .bottom .floating_toolbar {
   position: absolute;
@@ -64,7 +220,7 @@ main .bottom .floating_toolbar {
   transform: translateX(-50%);
   z-index: 9999;
   border-radius: 0.75rem;
-  background-color: var(--secondery-bg);
+  background-color: var(--primary-bg);
   padding-block: var(--padding-md);
   padding-inline: var(--padding-xl);
   display: flex;

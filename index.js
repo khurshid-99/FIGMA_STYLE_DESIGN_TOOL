@@ -156,7 +156,7 @@ const selectElement = () => {
     }
 
     selectId = id;
-    e.target.style.border = "1px solid #0c8ce9";
+    e.target.style.border = "2px solid #0c8ce9";
   });
 };
 
