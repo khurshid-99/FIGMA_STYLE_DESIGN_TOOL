@@ -51,6 +51,7 @@ main .bottom .middle {
   width: 80%;
   height: 100%;
   background-color: #2c2c2c;
+  overflow: hidden;
 }
 main .bottom .right {
   min-width: 15rem;
@@ -93,4 +94,37 @@ main .bottom .floating_toolbar .icon img {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
+}
+
+.add_star {
+  position: relative;
+  display: block;
+  width: 0;
+  height: 0;
+  margin: 50px 0;
+  color: #f5b301;
+  border-right: 50px solid transparent;
+  border-bottom: 35px solid #f5b301;
+  border-left: 50px solid transparent;
+  transform: rotate(35deg);
+}
+.add_star::before {
+  content: "";
+  position: absolute;
+  top: -22px;
+  left: -32px;
+  border-bottom: 40px solid #f5b301;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  transform: rotate(-35deg);
+}
+.add_star::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: -52px;
+  border-right: 50px solid transparent;
+  border-bottom: 35px solid #f5b301;
+  border-left: 50px solid transparent;
+  transform: rotate(-70deg);
 }/*# sourceMappingURL=style.css.map */
