@@ -51,11 +51,11 @@
               <div class="position_width_height">
                 <div>
                   <p>X</p>
-                  <input type="number" name="" id="" />
+                  <input class="x_input" type="number" name="" id="" />
                 </div>
                 <div>
                   <p>Y</p>
-                  <input type="number" name="" id="" />
+                  <input class="y_input" type="number" name="" id="" />
                 </div>
               </div>
             </div>
@@ -65,11 +65,11 @@
             <div class="layout_width_height">
               <div>
                 <p>W</p>
-                <input type="number" name="" id="" />
+                <input class="width_input" type="number" name="" id="" />
               </div>
               <div>
                 <p>H</p>
-                <input type="number" name="" id="" />
+                <input class="height_input" type="number" name="" id="" />
               </div>
             </div>
           </div>
@@ -77,18 +77,24 @@
             <h4>Opacity</h4>
             <div>
               <img src="images/opacity.png" alt="" />
-              <input type="number" name="" id="" />
+              <input class="opacity_input" type="number" name="" id="" />
             </div>
           </div>
           <div class="fill">
             <h4>Fill</h4>
-            <input type="color" name="" id="" />
+            <input class="color_input" type="color" name="" id="" />
             <p></p>
           </div>
           <div class="stroke">
             <h4>stroke</h4>
-            <input type="color" name="" id="" />
-            <p></p>
+            <input class="stroke_input" type="color" name="" id="" />
+            <input class="stroke_input_width" type="number" name="" id="" />
+            <select name="" id="" class="stroke_input_style">
+              <option value="solid">solid</option>
+              <option value="dashed">dashed</option>
+              <option value="double">double</option>
+              <option value="dotted">dotted</option>
+            </select>
           </div>
         </div>
         <div class="floating_toolbar">
