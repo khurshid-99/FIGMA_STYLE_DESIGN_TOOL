@@ -46,6 +46,37 @@ main .bottom {
 main .bottom .left {
   min-width: 15rem;
   height: 100%;
+  padding-inline: 1rem;
+}
+main .bottom .left .layers-panel {
+  margin-top: 20px;
+}
+main .bottom .left .layers-panel h3 {
+  font-weight: 200;
+  margin-block: 1rem;
+}
+main .bottom .left .layers-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+main .bottom .left .layers-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  background: var(--button-bg);
+  cursor: pointer;
+  border-radius: 4px;
+}
+main .bottom .left .layers-item.active {
+  background: #0c8ce9;
+  color: white;
+}
+main .bottom .left .layers-controls button {
+  margin-left: 4px;
+  cursor: pointer;
 }
 main .bottom .middle {
   position: relative;
@@ -54,28 +85,32 @@ main .bottom .middle {
   background-color: var(--secondery-bg);
   overflow: hidden;
 }
-main .bottom .right {
-  min-width: 15rem;
+main .bottom .right_wraper {
   height: 100%;
+  min-width: 15rem;
   padding: var(--padding-md);
+  transition: all 0.3s linear;
 }
-main .bottom .right .position_contanier {
+main .bottom .right_wraper .right {
+  display: none;
+}
+main .bottom .right_wraper .right .position_contanier {
   border-bottom: 1px solid rgba(245, 245, 245, 0.377);
   padding-bottom: 1rem;
 }
-main .bottom .right .position_contanier .alignment {
+main .bottom .right_wraper .right .position_contanier .alignment {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
 }
-main .bottom .right .position_contanier .alignment div {
+main .bottom .right_wraper .right .position_contanier .alignment div {
   border-radius: 0.25rem;
   overflow: hidden;
   display: flex;
   gap: 5px;
   border: 1px solid rgba(245, 245, 245, 0.377);
 }
-main .bottom .right .position_contanier .alignment div button {
+main .bottom .right_wraper .right .position_contanier .alignment div button {
   border: none;
   background-color: var(--button-bg);
   padding-inline: var(--padding-md);
@@ -83,19 +118,19 @@ main .bottom .right .position_contanier .alignment div button {
   transition: all 0.3s linear;
   cursor: pointer;
 }
-main .bottom .right .position_contanier .alignment div button:hover {
+main .bottom .right_wraper .right .position_contanier .alignment div button:hover {
   background-color: #858585;
 }
-main .bottom .right .position_contanier .position h4 {
+main .bottom .right_wraper .right .position_contanier .position h4 {
   font-weight: 100;
   margin-block: 1rem;
 }
-main .bottom .right .position_contanier .position .position_width_height {
+main .bottom .right_wraper .right .position_contanier .position .position_width_height {
   color: var(--secondery-bg);
   display: flex;
   gap: 1rem;
 }
-main .bottom .right .position_contanier .position .position_width_height div {
+main .bottom .right_wraper .right .position_contanier .position .position_width_height div {
   padding: 0.5rem;
   background-color: var(--button-bg);
   display: flex;
@@ -105,30 +140,30 @@ main .bottom .right .position_contanier .position .position_width_height div {
   border: 1px solid transparent;
   transition: all 0.3s linear;
 }
-main .bottom .right .position_contanier .position .position_width_height div:hover {
+main .bottom .right_wraper .right .position_contanier .position .position_width_height div:hover {
   border: 1px solid rgba(245, 245, 245, 0.377);
 }
-main .bottom .right .position_contanier .position .position_width_height div input {
+main .bottom .right_wraper .right .position_contanier .position .position_width_height div input {
   width: 5rem;
   background-color: transparent;
   outline: none;
   border: none;
   color: var(--secondery-bg);
 }
-main .bottom .right .layout_contanier {
+main .bottom .right_wraper .right .layout_contanier {
   border-bottom: 1px solid rgba(245, 245, 245, 0.377);
   padding-bottom: 1rem;
 }
-main .bottom .right .layout_contanier h4 {
+main .bottom .right_wraper .right .layout_contanier h4 {
   font-weight: 100;
   margin-block: 1rem;
 }
-main .bottom .right .layout_contanier .layout_width_height {
+main .bottom .right_wraper .right .layout_contanier .layout_width_height {
   color: var(--secondery-bg);
   display: flex;
   gap: 1rem;
 }
-main .bottom .right .layout_contanier .layout_width_height div {
+main .bottom .right_wraper .right .layout_contanier .layout_width_height div {
   padding: 0.5rem;
   background-color: var(--button-bg);
   display: flex;
@@ -138,25 +173,25 @@ main .bottom .right .layout_contanier .layout_width_height div {
   border: 1px solid transparent;
   transition: all 0.3s linear;
 }
-main .bottom .right .layout_contanier .layout_width_height div:hover {
+main .bottom .right_wraper .right .layout_contanier .layout_width_height div:hover {
   border: 1px solid rgba(245, 245, 245, 0.377);
 }
-main .bottom .right .layout_contanier .layout_width_height div input {
+main .bottom .right_wraper .right .layout_contanier .layout_width_height div input {
   width: 5rem;
   background-color: transparent;
   outline: none;
   border: none;
   color: var(--secondery-bg);
 }
-main .bottom .right .opacity {
+main .bottom .right_wraper .right .opacity {
   border-bottom: 1px solid rgba(245, 245, 245, 0.377);
   padding-bottom: 1rem;
 }
-main .bottom .right .opacity h4 {
+main .bottom .right_wraper .right .opacity h4 {
   font-weight: 100;
   margin-block: 1rem;
 }
-main .bottom .right .opacity div {
+main .bottom .right_wraper .right .opacity div {
   padding: 0.5rem;
   background-color: var(--button-bg);
   display: inline-flex;
@@ -166,54 +201,126 @@ main .bottom .right .opacity div {
   border: 1px solid transparent;
   transition: all 0.3s linear;
 }
-main .bottom .right .opacity div:hover {
+main .bottom .right_wraper .right .opacity div:hover {
   border: 1px solid rgba(245, 245, 245, 0.377);
 }
-main .bottom .right .opacity div img {
+main .bottom .right_wraper .right .opacity div img {
   width: 1rem;
 }
-main .bottom .right .opacity div input {
+main .bottom .right_wraper .right .opacity div input {
   width: 5rem;
   background-color: transparent;
   outline: none;
   border: none;
   color: var(--secondery-bg);
 }
-main .bottom .right .fill {
+main .bottom .right_wraper .right .rotate_contanier {
   border-bottom: 1px solid rgba(245, 245, 245, 0.377);
   padding-bottom: 1rem;
 }
-main .bottom .right .fill h4 {
+main .bottom .right_wraper .right .rotate_contanier h4 {
   font-weight: 100;
   margin-block: 1rem;
 }
-main .bottom .right .fill input {
+main .bottom .right_wraper .right .rotate_contanier div {
+  padding: 0.5rem;
+  background-color: var(--button-bg);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  transition: all 0.3s linear;
+}
+main .bottom .right_wraper .right .rotate_contanier div:hover {
+  border: 1px solid rgba(245, 245, 245, 0.377);
+}
+main .bottom .right_wraper .right .rotate_contanier div img {
+  width: 1.5rem;
+}
+main .bottom .right_wraper .right .rotate_contanier div input {
+  color: var(--secondery-bg);
+  width: 5rem;
+  background: transparent;
+  outline: none;
+  border: none;
+}
+main .bottom .right_wraper .right .fill {
+  border-bottom: 1px solid rgba(245, 245, 245, 0.377);
+  padding-bottom: 1rem;
+}
+main .bottom .right_wraper .right .fill h4 {
+  font-weight: 100;
+  margin-block: 1rem;
+}
+main .bottom .right_wraper .right .fill input {
   outline: none;
   border: none;
   transition: all 0.3s linear;
   cursor: pointer;
 }
-main .bottom .right .fill input:hover {
+main .bottom .right_wraper .right .fill input:hover {
   border: 1px solid rgb(236, 236, 236);
 }
-main .bottom .right .stroke {
+main .bottom .right_wraper .right .stroke {
   border-bottom: 1px solid rgba(245, 245, 245, 0.377);
   padding-bottom: 1rem;
 }
-main .bottom .right .stroke h4 {
+main .bottom .right_wraper .right .stroke h4 {
   font-weight: 100;
   margin-block: 1rem;
 }
-main .bottom .right .stroke input {
+main .bottom .right_wraper .right .stroke div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s linear;
+}
+main .bottom .right_wraper .right .stroke div .stroke_input_width,
+main .bottom .right_wraper .right .stroke div .stroke_input_style {
+  padding: 0.5rem;
+  background-color: var(--button-bg);
+  width: 5rem;
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: var(--secondery-bg);
+}
+main .bottom .right_wraper .right .stroke div .stroke_input_width:hover,
+main .bottom .right_wraper .right .stroke div .stroke_input_style:hover {
+  border: 1px solid rgba(245, 245, 245, 0.377);
+}
+main .bottom .right_wraper .right .stroke div input {
   outline: none;
   border: none;
   transition: all 0.3s linear;
   cursor: pointer;
 }
-main .bottom .right .stroke input:hover {
+main .bottom .right_wraper .right .stroke div input:hover {
   border: 1px solid rgb(236, 236, 236);
 }
-main .bottom .floating_toolbar {
+main .bottom .right_wraper .right .z_index_contanier {
+  border-bottom: 1px solid rgba(245, 245, 245, 0.377);
+  padding-bottom: 1rem;
+}
+main .bottom .right_wraper .right .z_index_contanier h4 {
+  font-weight: 100;
+  margin-block: 1rem;
+}
+main .bottom .right_wraper .right .z_index_contanier input {
+  width: 5rem;
+  padding: 0.5rem;
+  background-color: var(--button-bg);
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: var(--secondery-bg);
+  transition: all 0.3s linear;
+}
+main .bottom .right_wraper .right .z_index_contanier input:hover {
+  border: 1px solid rgb(236, 236, 236);
+}
+main .floating_toolbar {
   position: absolute;
   bottom: 5%;
   left: 50%;
@@ -228,7 +335,7 @@ main .bottom .floating_toolbar {
   justify-content: center;
   gap: 1rem;
 }
-main .bottom .floating_toolbar .icon {
+main .floating_toolbar .icon {
   width: 2rem;
   height: 2rem;
   padding: var(--padding-sm);
@@ -238,13 +345,13 @@ main .bottom .floating_toolbar .icon {
   transition: all 0.3s linear;
   cursor: pointer;
 }
-main .bottom .floating_toolbar .icon:hover {
+main .floating_toolbar .icon:hover {
   background: #0c8ce9;
 }
-main .bottom .floating_toolbar .icon[data-active=true] {
+main .floating_toolbar .icon[data-active=true] {
   background: #0c8ce9;
 }
-main .bottom .floating_toolbar .icon img {
+main .floating_toolbar .icon img {
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
@@ -252,35 +359,35 @@ main .bottom .floating_toolbar .icon img {
      object-position: center;
 }
 
-.add_star {
-  position: relative;
-  display: block;
-  width: 0;
-  height: 0;
-  margin: 50px 0;
-  color: #f5b301;
-  border-right: 50px solid transparent;
-  border-bottom: 35px solid #f5b301;
-  border-left: 50px solid transparent;
-  transform: rotate(35deg);
-}
-.add_star::before {
-  content: "";
+.resize-handle {
   position: absolute;
-  top: -22px;
-  left: -32px;
-  border-bottom: 40px solid #f5b301;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  transform: rotate(-35deg);
+  width: 10px;
+  height: 10px;
+  background: #0c8ce9;
+  border-radius: 2px;
+  z-index: 9999;
 }
-.add_star::after {
-  content: "";
-  position: absolute;
-  top: 3px;
-  left: -52px;
-  border-right: 50px solid transparent;
-  border-bottom: 35px solid #f5b301;
-  border-left: 50px solid transparent;
-  transform: rotate(-70deg);
+
+.resize-handle.tl {
+  top: -10px;
+  left: -10px;
+  cursor: nwse-resize;
+}
+
+.resize-handle.tr {
+  top: -10px;
+  right: -10px;
+  cursor: nesw-resize;
+}
+
+.resize-handle.bl {
+  bottom: -10px;
+  left: -10px;
+  cursor: nesw-resize;
+}
+
+.resize-handle.br {
+  bottom: -10px;
+  right: -10px;
+  cursor: nwse-resize;
 }/*# sourceMappingURL=style.css.map */

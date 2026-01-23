@@ -8,95 +8,118 @@
   </head>
   <body>
     <main>
-      <nav>
-        <!-- hay -->
-      </nav>
       <div class="bottom">
-        <div class="left"></div>
-        <div class="middle canvas"></div>
-        <div class="right">
-          <div class="position_contanier">
-            <div class="alignment">
-              <div>
-                <button>
-                  <img src="images/align-item-left-line.png" alt="" />
-                </button>
-                <button>
-                  <img
-                    src="images/align-item-horizontal-center-line.png"
-                    alt=""
-                  />
-                </button>
-                <button>
-                  <img src="images/align-item-right-line.png" alt="" />
-                </button>
-              </div>
-              <div>
-                <button>
-                  <img src="images/align-item-top-line.png" alt="" />
-                </button>
-                <button>
-                  <img
-                    src="images/align-item-vertical-center-line.png"
-                    alt=""
-                  />
-                </button>
-                <button>
-                  <img src="images/align-item-bottom-line.png" alt="" />
-                </button>
-              </div>
-            </div>
-            <div class="position">
-              <h4>Position</h4>
-              <div class="position_width_height">
-                <div>
-                  <p>X</p>
-                  <input class="x_input" type="number" name="" id="" />
-                </div>
-                <div>
-                  <p>Y</p>
-                  <input class="y_input" type="number" name="" id="" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="layout_contanier">
-            <h4>Layout</h4>
-            <div class="layout_width_height">
-              <div>
-                <p>W</p>
-                <input class="width_input" type="number" name="" id="" />
-              </div>
-              <div>
-                <p>H</p>
-                <input class="height_input" type="number" name="" id="" />
-              </div>
-            </div>
-          </div>
-          <div class="opacity">
-            <h4>Opacity</h4>
-            <div>
-              <img src="images/opacity.png" alt="" />
-              <input class="opacity_input" type="number" name="" id="" />
-            </div>
-          </div>
-          <div class="fill">
-            <h4>Fill</h4>
-            <input class="color_input" type="color" name="" id="" />
-            <p></p>
-          </div>
-          <div class="stroke">
-            <h4>stroke</h4>
-            <input class="stroke_input" type="color" name="" id="" />
-            <input class="stroke_input_width" type="number" name="" id="" />
-            <select name="" id="" class="stroke_input_style">
-              <option value="solid">solid</option>
-              <option value="dashed">dashed</option>
-              <option value="double">double</option>
-              <option value="dotted">dotted</option>
-            </select>
+        <div class="left">
+          <div class="layers-panel">
+            <h3>Layers</h3>
+            <ul class="layers-list"></ul>
           </div>
         </div>
+        <div class="middle canvas"></div>
+        <div class="right_wraper">
+          <div class="right">
+            <div class="position_contanier">
+              <div class="alignment">
+                <div>
+                  <button>
+                    <img src="images/align-item-left-line.png" alt="" />
+                  </button>
+                  <button>
+                    <img
+                      src="images/align-item-horizontal-center-line.png"
+                      alt=""
+                    />
+                  </button>
+                  <button>
+                    <img src="images/align-item-right-line.png" alt="" />
+                  </button>
+                </div>
+                <div>
+                  <button>
+                    <img src="images/align-item-top-line.png" alt="" />
+                  </button>
+                  <button>
+                    <img
+                      src="images/align-item-vertical-center-line.png"
+                      alt=""
+                    />
+                  </button>
+                  <button>
+                    <img src="images/align-item-bottom-line.png" alt="" />
+                  </button>
+                </div>
+              </div>
+              <div class="position">
+                <h4>Position</h4>
+                <div class="position_width_height">
+                  <div>
+                    <p>X</p>
+                    <input class="x_input" type="number" name="" id="" />
+                  </div>
+                  <div>
+                    <p>Y</p>
+                    <input class="y_input" type="number" name="" id="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="layout_contanier">
+              <h4>Layout</h4>
+              <div class="layout_width_height">
+                <div>
+                  <p>W</p>
+                  <input class="width_input" type="number" name="" id="" />
+                </div>
+                <div>
+                  <p>H</p>
+                  <input class="height_input" type="number" name="" id="" />
+                </div>
+              </div>
+            </div>
+            <div class="opacity">
+              <h4>Opacity</h4>
+              <div>
+                <img src="images/opacity.png" alt="" />
+                <input class="opacity_input" type="number" name="" id="" />
+              </div>
+            </div>
+            <div class="rotate_contanier">
+              <h4>Rounded</h4>
+              <div>
+                <img src="images/rounded-corner.png" alt="" />
+                <input class="rounded_input" type="number" />
+              </div>
+            </div>
+            <div class="fill">
+              <h4>Fill</h4>
+              <input class="color_input" type="color" name="" id="" />
+              <p></p>
+            </div>
+            <div class="stroke">
+              <h4>stroke</h4>
+              <div>
+                <input class="stroke_input" type="color" name="" id="" />
+                <input class="stroke_input_width" type="number" name="" id="" />
+                <select name="" id="" class="stroke_input_style">
+                  <option value="solid">solid</option>
+                  <option value="dashed">dashed</option>
+                  <option value="double">double</option>
+                  <option value="dotted">dotted</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="z_index_contanier">
+              <h4>Z-Index</h4>
+              <input class="z_index" type="number" name="" id="" />
+            </div>
+            <div class="rotated_contanier">
+              <h4>Rotated</h4>
+              <input class="rotated" type="number" name="" id="" />
+            </div>
+          </div>
+        </div>
+
         <div class="floating_toolbar">
           <button data-active="false" data-tool="cursor" class="icon cursor">
             <img src="images/cursor.png" alt="" />
