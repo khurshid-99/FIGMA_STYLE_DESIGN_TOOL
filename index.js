@@ -427,7 +427,7 @@ const rgbToHex = (color) => {
 const updateStyles = (key, value) => {
   if (!selectId) return;
 
-  console.log(value);
+  // console.log(value);
   
   if (value < 0) return;
 
