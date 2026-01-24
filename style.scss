@@ -107,13 +107,13 @@ main {
       height: 100%;
       min-width: 15rem;
       padding: var(--padding-md);
-      transition: all 0.3s linear;
+
       .right {
         display: none;
 
         .position_contanier {
           border-bottom: 1px solid rgba(245, 245, 245, 0.377);
-          padding-bottom: 1rem;
+          padding-bottom: 0.5rem;
           .alignment {
             display: flex;
             gap: 1rem;
@@ -140,6 +140,11 @@ main {
 
                 &:hover {
                   background-color: #858585;
+                }
+
+                &:active {
+                  scale: 0.9;
+                  border-radius: 0.25rem;
                 }
               }
             }
@@ -185,10 +190,10 @@ main {
 
         .layout_contanier {
           border-bottom: 1px solid rgba(245, 245, 245, 0.377);
-          padding-bottom: 1rem;
+          padding-bottom: 0.5rem;
           h4 {
             font-weight: 100;
-            margin-block: 1rem;
+            margin-block: 0.5rem;
           }
           .layout_width_height {
             color: var(--secondery-bg);
@@ -223,10 +228,10 @@ main {
 
         .opacity {
           border-bottom: 1px solid rgba(245, 245, 245, 0.377);
-          padding-bottom: 1rem;
+          padding-bottom: 0.5rem;
           h4 {
             font-weight: 100;
-            margin-block: 1rem;
+            margin-block: 0.5rem;
           }
           div {
             padding: 0.5rem;
@@ -260,10 +265,10 @@ main {
 
         .rotate_contanier {
           border-bottom: 1px solid rgba(245, 245, 245, 0.377);
-          padding-bottom: 1rem;
+          padding-bottom: 0.5rem;
           h4 {
             font-weight: 100;
-            margin-block: 1rem;
+            margin-block: 0.5rem;
           }
           div {
             padding: 0.5rem;
@@ -294,10 +299,10 @@ main {
 
         .fill {
           border-bottom: 1px solid rgba(245, 245, 245, 0.377);
-          padding-bottom: 1rem;
+          padding-bottom: 0.5rem;
           h4 {
             font-weight: 100;
-            margin-block: 1rem;
+            margin-block: 1.5em;
           }
 
           input {
@@ -314,10 +319,10 @@ main {
 
         .stroke {
           border-bottom: 1px solid rgba(245, 245, 245, 0.377);
-          padding-bottom: 1rem;
+          padding-bottom: 0.5rem;
           h4 {
             font-weight: 100;
-            margin-block: 1rem;
+            margin-block: 0.5rem;
           }
           div {
             display: flex;
@@ -356,10 +361,10 @@ main {
 
         .z_index_contanier {
           border-bottom: 1px solid rgba(245, 245, 245, 0.377);
-          padding-bottom: 1rem;
+          padding-bottom: 0.5rem;
           h4 {
             font-weight: 100;
-            margin-block: 1rem;
+            margin-block: 0.5rem;
           }
           input {
             width: 5rem;
@@ -374,6 +379,69 @@ main {
             &:hover {
               border: 1px solid rgb(236, 236, 236);
             }
+          }
+        }
+
+        .rotated_contanier {
+          border-bottom: 1px solid rgba(245, 245, 245, 0.377);
+          padding-bottom: 0.5rem;
+          h4 {
+            font-weight: 100;
+            margin-block: 0.5rem;
+          }
+
+          input {
+            width: 5rem;
+            padding: 0.5rem;
+            background-color: var(--button-bg);
+            outline: none;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            color: var(--secondery-bg);
+
+            transition: all 0.3s linear;
+            &:hover {
+              border: 1px solid rgb(236, 236, 236);
+            }
+          }
+        }
+
+        .exportButtons {
+          border-bottom: 1px solid rgba(245, 245, 245, 0.377);
+          padding-bottom: 0.5rem;
+          button {
+            margin-top: 0.5rem;
+            background-color: var(--button-bg);
+            border: 1px solid transparent;
+            color: var(--secondery-bg);
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 200;
+            text-transform: capitalize;
+
+            transition: all 0.3s linear;
+
+            &:hover {
+              border: 1px solid rgb(236, 236, 236);
+            }
+            &:active {
+              scale: 0.9;
+            }
+          }
+        }
+      }
+      .canvas_details {
+        min-width: 15rem;
+        display: block;
+        padding: var(--padding-md);
+        div {
+          padding-bottom: 1rem;
+          border-bottom: 1px solid rgba(245, 245, 245, 0.377);
+          h4 {
+            font-weight: 100;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
           }
         }
       }
@@ -460,4 +528,18 @@ main {
   bottom: -10px;
   right: -10px;
   cursor: nwse-resize;
+}
+
+// ----
+
+.rotate-handle {
+  width: 12px;
+  height: 12px;
+  background: orange;
+  border-radius: 50%;
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: grab;
 }

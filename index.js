@@ -1,7 +1,12 @@
+window.oncontextmenu = () => false;
+
 const canvas = document.querySelector(".canvas");
 const buttons = document.querySelectorAll(".floating_toolbar .icon");
 
 const detilesPnal = document.querySelector(".right");
+const canvasPanel = document.querySelector(".canvas_details");
+
+const canvasBgInput = document.querySelector(".canvas_bg_input");
 
 const xInput = document.querySelector(".x_input");
 const yInput = document.querySelector(".y_input");
@@ -25,6 +30,11 @@ const zIndexInput = document.querySelector(".z_index");
 
 const layersList = document.querySelector(".layers-list");
 
+const rotationInput = document.querySelector(".rotation_input");
+
+const exportJsonBtn = document.getElementById("exportJsonBtn");
+const exportHtmlBtn = document.getElementById("exportHtmlBtn");
+
 let selectId = null;
 let activeTool = null;
 
@@ -46,12 +56,10 @@ const tools = {
     background: "#ffffff",
   },
   triangle: {
-    width: 0,
-    height: 0,
-
-    borderLeft: "50px solid transparent",
-    borderRight: "50px solid transparent",
-    borderBottom: "100px solid #0c8ce9",
+    width: "120px",
+    height: "100px",
+    background: "#ffffff",
+    "clip-path": "polygon(50% 0%, 0% 100%, 100% 100%)",
   },
   text: {
     width: "150px",
@@ -60,6 +68,21 @@ const tools = {
     fontSize: "20px",
     fontWeight: "400",
     fontFamily: "Arial",
+  },
+  ellipse: {
+    width: "100px",
+    height: "100px",
+    background: "#ffffff",
+
+    "border-radius": "100%",
+  },
+  star: {
+    width: "200px",
+    height: "200px",
+    // "aspect-ratio": 1,
+    background: "#FFBF00",
+    "clip-path":
+      "polygon(50% 0%, 61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)",
   },
 };
 
@@ -85,8 +108,17 @@ const makeDraggable = (element, id) => {
   document.addEventListener("mousemove", (e) => {
     if (!isDraggable) return;
 
-    element.style.left = e.clientX - offsetX + "px";
-    element.style.top = e.clientY - offsetY + "px";
+    const canvasRect = canvas.getBoundingClientRect();
+    const elRect = element.getBoundingClientRect();
+
+    let newLeft = e.clientX - offsetX;
+    let newTop = e.clientY - offsetY;
+
+    newLeft = clamp(newLeft, 0, canvasRect.width - elRect.width);
+    newTop = clamp(newTop, 0, canvasRect.height - elRect.height);
+
+    element.style.left = newLeft + "px";
+    element.style.top = newTop + "px";
 
     if (selectId === id) {
       xInput.value = parseInt(element.style.left);
@@ -132,9 +164,12 @@ const handleCreateShape = (tool) => {
     "border-style": "solid",
     "border-color": "#000000",
     "border-radius": "0px",
+
+    "clip-path": "",
+    "aspect-ratio": "",
   };
 
-  // 🔥 TEXT TOOL
+  // TEXT TOOL
   if (tool === "text") {
     div.classList.add("text");
     div.textContent = "Double click to edit";
@@ -153,8 +188,14 @@ const handleCreateShape = (tool) => {
     });
 
     enableTextEditing(div, id);
+  } else if (tool === "triangle") {
+    Object.assign(styles, tools[tool]);
+  } else if (tool === "ellipse") {
+    Object.assign(styles, tools[tool]);
+  } else if (tool === "star") {
+    Object.assign(styles, tools[tool]);
   }
-  // 🔲 NORMAL SHAPES
+  // NORMAL SHAPES
   else {
     Object.assign(styles, {
       width: "100px",
@@ -208,7 +249,6 @@ const restoreShaps = () => {
     div.className = shap;
     Object.assign(div.style, styles);
 
-
     if (tool === "text") {
       div.classList.add("text");
       div.textContent = text || "Double click to edit";
@@ -243,17 +283,28 @@ const selectElement = () => {
         const prevEl = document.getElementById(selectId);
         if (prevEl) {
           prevEl.style.outline = "none";
+          // prevEl.style.boxShadow = "none";
         }
       }
 
       selectId = null;
       removeResizeHandles();
-      canvas.style.cursor = "default";
-      toggleDetailsPanel();
+
+      // show canvas panel, hide shape panel
+      detilesPnal.style.display = "none";
+      canvasPanel.style.display = "block";
+
+      // set current canvas bg in input
+      canvasBgInput.value = rgbToHex(getComputedStyle(canvas).backgroundColor);
+
+      renderLayers();
+
       return;
     }
 
     const id = e.target.id;
+
+    // console.log(id);
 
     if (selectId === id) return;
 
@@ -266,15 +317,38 @@ const selectElement = () => {
 
     selectId = id;
     e.target.style.outline = "2px solid #0c8ce9";
+    // e.target.style.boxShadow = "0 0 0 2px #0c8ce9";
 
     addResizeHandles(e.target);
 
+    //  show shape panel, hide canvas panel
+    detilesPnal.style.display = "block";
+    canvasPanel.style.display = "none";
+
     showDetils();
     toggleDetailsPanel();
+    renderLayers();
   });
 };
 
 selectElement();
+
+const getCanvasBg = () => {
+  return localStorage.getItem("canvasBg") || "#ffffff";
+};
+
+const setCanvasBg = (color) => {
+  localStorage.setItem("canvasBg", color);
+};
+
+canvas.style.background = getCanvasBg();
+canvasBgInput.value = getCanvasBg();
+
+canvasBgInput.addEventListener("input", () => {
+  const color = canvasBgInput.value;
+  canvas.style.background = color;
+  setCanvasBg(color);
+});
 
 const deletElement = () => {
   document.addEventListener("keydown", (e) => {
@@ -308,6 +382,7 @@ deletElement();
 const showDetils = () => {
   const shap = getShapes();
   if (!selectId) return;
+
   const shape = shap.find((s) => s.id === selectId);
 
   if (!shape) return;
@@ -332,6 +407,9 @@ const showDetils = () => {
 
   roundedInput.value = parseInt(styles["border-radius"]);
   zIndexInput.value = parseInt(styles["z-index"]);
+
+  rotationInput.value =
+    parseInt(shape.styles.transform?.match(/-?\d+/)?.[0]) || 0;
 };
 
 // I am not create this function, this function is create by GPT
@@ -418,6 +496,25 @@ zIndexInput.addEventListener("input", () => {
   renderLayers();
 });
 
+rotationInput.addEventListener("input", () => {
+  if (!selectId) return;
+
+  const deg = Number(rotationInput.value) || 0;
+
+  const shapes = getShapes();
+  const shape = shapes.find((s) => s.id === selectId);
+  const el = document.getElementById(selectId);
+
+  if (!shape || !el) return;
+
+  const transformValue = `rotate(${deg}deg)`;
+
+  shape.styles.transform = transformValue;
+  el.style.transform = transformValue;
+
+  setShapes(shapes);
+});
+
 // ---
 
 const keyboardHandler = () => {
@@ -431,24 +528,28 @@ const keyboardHandler = () => {
     const shape = shapes.find((s) => s.id === selectId);
     if (!shape) return;
 
-    if (e.key === "ArrowUp") {
-      shape.styles.top = parseInt(shape.styles.top) - 1 + "px";
-    }
+    const canvasRect = canvas.getBoundingClientRect();
+    const elRect = element.getBoundingClientRect();
 
-    if (e.key === "ArrowDown") {
-      shape.styles.top = parseInt(shape.styles.top) + 1 + "px";
-    }
+    let left = parseInt(shape.styles.left);
+    let top = parseInt(shape.styles.top);
 
-    if (e.key === "ArrowLeft") {
-      shape.styles.left = parseInt(shape.styles.left) - 1 + "px";
-    }
+    const step = 5; // movement speed
 
-    if (e.key === "ArrowRight") {
-      shape.styles.left = parseInt(shape.styles.left) + 1 + "px";
-    }
+    if (e.key === "ArrowUp") top -= step;
+    if (e.key === "ArrowDown") top += step;
+    if (e.key === "ArrowLeft") left -= step;
+    if (e.key === "ArrowRight") left += step;
 
-    element.style.top = shape.styles.top;
+    // Clamp inside canvas
+    left = clamp(left, 0, canvasRect.width - elRect.width);
+    top = clamp(top, 0, canvasRect.height - elRect.height);
+
+    shape.styles.left = left + "px";
+    shape.styles.top = top + "px";
+
     element.style.left = shape.styles.left;
+    element.style.top = shape.styles.top;
 
     showDetils();
     setShapes(shapes);
@@ -472,10 +573,22 @@ const addResizeHandles = (element) => {
       startResize(e, element, pos);
     });
   });
+
+  // Rotated Handle
+  const rotateHandle = document.createElement("div");
+  rotateHandle.className = "rotate-handle";
+  element.appendChild(rotateHandle);
+
+  rotateHandle.addEventListener("mousedown", (e) => {
+    e.stopPropagation();
+    startRotate(e, element);
+  });
 };
 
 const removeResizeHandles = () => {
-  document.querySelectorAll(".resize-handle").forEach((h) => h.remove());
+  document
+    .querySelectorAll(".resize-handle, .rotate-handle")
+    .forEach((h) => h.remove());
 };
 
 const getHoverEdge = (e, element) => {
@@ -539,8 +652,6 @@ const startResize = (e, element, position) => {
     let dx = e.clientX - startX;
     let dy = e.clientY - startY;
 
-    // console.log(dx);
-
     let newWidth = startWidth;
     let newHeight = startHeight;
     let newLeft = startLeft;
@@ -558,9 +669,11 @@ const startResize = (e, element, position) => {
       newTop = startTop + dy;
     }
 
-    if (newWidth < minSize || newHeight < minSize) return;
+    const canvasRect = canvas.getBoundingClientRect();
 
-    // console.log(newWidth);
+    //  Clamp inside canvas
+    newWidth = clamp(newWidth, minSize, canvasRect.width - newLeft);
+    newHeight = clamp(newHeight, minSize, canvasRect.height - newTop);
 
     element.style.width = newWidth + "px";
     element.style.height = newHeight + "px";
@@ -707,3 +820,177 @@ function enableTextEditing(element, id) {
     renderLayers();
   });
 }
+
+// -----
+
+// this is creting by help GPT
+
+function downloadFile(filename, content, type) {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+exportJsonBtn.addEventListener("click", () => {
+  const shapes = getShapes();
+
+  const json = JSON.stringify(shapes, null, 2);
+
+  downloadFile("design.json", json, "application/json");
+});
+
+exportHtmlBtn.addEventListener("click", () => {
+  const shapes = getShapes();
+
+  let html = `
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Exported Design</title>
+</head>
+<body>
+<div style="position:relative;width:100vw;height:100vh;">
+`;
+
+  shapes.forEach((shape) => {
+    const styleString = Object.entries(shape.styles)
+      .map(([k, v]) => `${k}:${v}`)
+      .join(";");
+
+    if (shape.tool === "text") {
+      html += `<div style="${styleString}">${shape.text || ""}</div>\n`;
+    } else {
+      html += `<div style="${styleString}"></div>\n`;
+    }
+  });
+
+  html += `
+</div>
+</body>
+</html>
+`;
+
+  downloadFile("design.html", html, "text/html");
+});
+
+// ---
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+// ---
+function startRotate(e, element) {
+  const rect = element.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+
+  const startAngle =
+    Math.atan2(e.clientY - centerY, e.clientX - centerX) * (180 / Math.PI);
+
+  const shapes = getShapes();
+  const shape = shapes.find((s) => s.id === element.id);
+
+  const currentRotation =
+    parseInt(shape.styles.transform?.match(/-?\d+/)?.[0]) || 0;
+
+  const onMouseMove = (e) => {
+    const angle =
+      Math.atan2(e.clientY - centerY, e.clientX - centerX) * (180 / Math.PI);
+
+    const rotation = Math.round(currentRotation + (angle - startAngle));
+
+    const transformValue = `rotate(${rotation}deg)`;
+
+    element.style.transform = transformValue;
+    shape.styles.transform = transformValue;
+
+    rotationInput.value = rotation;
+
+    setShapes(shapes);
+  };
+
+  const onMouseUp = () => {
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", onMouseUp);
+  };
+
+  document.addEventListener("mousemove", onMouseMove);
+  document.addEventListener("mouseup", onMouseUp);
+}
+
+// ---------
+
+// help from GPT
+function alignSelected(type) {
+  if (!selectId) return;
+
+  const el = document.getElementById(selectId);
+  if (!el) return;
+
+  const shapes = getShapes();
+  const shape = shapes.find((s) => s.id === selectId);
+  if (!shape) return;
+
+  const canvasRect = canvas.getBoundingClientRect();
+  const elRect = el.getBoundingClientRect();
+
+  let left = parseInt(shape.styles.left);
+  let top = parseInt(shape.styles.top);
+
+  switch (type) {
+    case "left":
+      left = 0;
+      break;
+
+    case "right":
+      left = canvasRect.width - elRect.width;
+      break;
+
+    case "center-h":
+      left = (canvasRect.width - elRect.width) / 2;
+      break;
+
+    case "top":
+      top = 0;
+      break;
+
+    case "bottom":
+      top = canvasRect.height - elRect.height;
+      break;
+
+    case "center-v":
+      top = (canvasRect.height - elRect.height) / 2;
+      break;
+  }
+
+  // Apply
+  shape.styles.left = left + "px";
+  shape.styles.top = top + "px";
+
+  el.style.left = shape.styles.left;
+  el.style.top = shape.styles.top;
+
+  // Update inputs
+  xInput.value = Math.round(left);
+  yInput.value = Math.round(top);
+
+  setShapes(shapes);
+}
+
+// This is not good partic, but i do it
+document.querySelector(".align_left").onclick = () => alignSelected("left");
+document.querySelector(".align_center_h").onclick = () =>
+  alignSelected("center-h");
+document.querySelector(".align_right").onclick = () => alignSelected("right");
+
+document.querySelector(".align_top").onclick = () => alignSelected("top");
+document.querySelector(".align_center_v").onclick = () =>
+  alignSelected("center-v");
+document.querySelector(".align_bottom").onclick = () => alignSelected("bottom");

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Figma | Khurshid</title>
+    <title>Figma | Khurshid Alam</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -21,30 +21,30 @@
             <div class="position_contanier">
               <div class="alignment">
                 <div>
-                  <button>
+                  <button class="align_left">
                     <img src="images/align-item-left-line.png" alt="" />
                   </button>
-                  <button>
+                  <button class="align_center_h">
                     <img
                       src="images/align-item-horizontal-center-line.png"
                       alt=""
                     />
                   </button>
-                  <button>
+                  <button class="align_right">
                     <img src="images/align-item-right-line.png" alt="" />
                   </button>
                 </div>
                 <div>
-                  <button>
+                  <button class="align_top">
                     <img src="images/align-item-top-line.png" alt="" />
                   </button>
-                  <button>
+                  <button class="align_center_v">
                     <img
                       src="images/align-item-vertical-center-line.png"
                       alt=""
                     />
                   </button>
-                  <button>
+                  <button class="align_bottom">
                     <img src="images/align-item-bottom-line.png" alt="" />
                   </button>
                 </div>
@@ -115,21 +115,31 @@
             </div>
             <div class="rotated_contanier">
               <h4>Rotated</h4>
-              <input class="rotated" type="number" name="" id="" />
+              <input class="rotation_input" type="number" name="" id="" />
+            </div>
+            <div class="exportButtons">
+              <button id="exportJsonBtn">Export JSON</button>
+              <button id="exportHtmlBtn">Export HTML</button>
+            </div>
+          </div>
+          <div class="canvas_details">
+            <div>
+              <h4>Canvas</h4>
+              <input type="color" name="" id="" class="canvas_bg_input" />
             </div>
           </div>
         </div>
 
         <div class="floating_toolbar">
-          <button data-active="false" data-tool="cursor" class="icon cursor">
+          <!-- <button data-active="false" data-tool="cursor" class="icon cursor">
             <img src="images/cursor.png" alt="" />
-          </button>
+          </button> -->
           <button data-active="false" data-tool="text" class="icon text">
             <img src="images/text.png" alt="" />
           </button>
-          <button data-active="false" data-tool="grid" class="icon grid">
+          <!-- <button data-active="false" data-tool="grid" class="icon grid">
             <img src="images/grid.png" alt="" />
-          </button>
+          </button> -->
           <button data-active="false" data-tool="square" class="icon square">
             <img src="images/square.png" alt="" />
           </button>
