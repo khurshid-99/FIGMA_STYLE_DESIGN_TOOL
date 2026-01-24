@@ -334,7 +334,7 @@ const selectElement = () => {
 selectElement();
 
 const getCanvasBg = () => {
-  return localStorage.getItem("canvasBg") || "#ffffff";
+  return localStorage.getItem("canvasBg") || "#d1d1d1";
 };
 
 const setCanvasBg = (color) => {
