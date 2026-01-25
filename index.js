@@ -428,7 +428,7 @@ const updateStyles = (key, value) => {
   if (!selectId) return;
 
   // console.log(value);
-  
+
   if (value < 0) return;
 
   const shapes = getShapes();
@@ -452,16 +452,18 @@ yInput.addEventListener("input", () =>
 );
 
 wInput.addEventListener("input", () =>
-  updateStyles("width", Number(wInput.value) ? wInput.value + "px" : "10px"),
+  updateStyles("width", Number(wInput.value) ? wInput.value + "px" : "5px"),
 );
 
 hInput.addEventListener("input", () =>
   updateStyles("height", Number(hInput.value) ? hInput.value + "px" : "5px"),
 );
 
-opacityInput.addEventListener("input", () =>
-  updateStyles("opacity", Number(opacityInput.value)),
-);
+opacityInput.addEventListener("input", () => {
+  const opacity = Number(opacityInput.value);
+
+  updateStyles("opacity", opacity);
+});
 
 colorInput.addEventListener("input", () =>
   updateStyles("background", colorInput.value),
